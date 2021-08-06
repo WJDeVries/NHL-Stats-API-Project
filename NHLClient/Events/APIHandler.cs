@@ -47,5 +47,28 @@ namespace NHLClient.Events
                 throw new HttpRequestException(httpResponseContent);
             }
         }
+
+        /// <summary>
+        /// Returns a roster by Team ID.
+        /// </summary>
+        /// <param name="teamId">The IDs of the teams to get the roster of.</param>
+        /// <returns>An object containing the Copyright and a List of Players named Roster.</returns>
+        public async Task<Schema.Containers.TeamRoster> GetRoster(int teamId)
+        {
+            var query = HttpUtility.ParseQueryString(string.Empty);
+
+            HttpResponseMessage httpResponseMessage = await _client.GetAsync($"{_urlFragment}/teams/{teamId}/roster", $"", "");
+
+            string httpResponseContent = await httpResponseMessage.Content.ReadAsStringAsync();
+
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<Schema.Containers.TeamRoster>(httpResponseContent);
+            }
+            else
+            {
+                throw new HttpRequestException(httpResponseContent);
+            }
+        }
     }
 }

@@ -53,9 +53,9 @@ namespace NHLClientTests
             Assert.AreEqual("/api/v1/venues/5145", rwVenue.Link, "Wrong Venue.Link");
             Assert.AreEqual("Detroit", rwVenue.City, "Wrong Venue.City");
 
-            Assert.AreEqual(26, rwDivision.Id, "Wrong division.Id");
-            Assert.AreEqual("Discover Central", rwDivision.Name, "Wrong division.Name");
-            Assert.AreEqual("/api/v1/divisions/26", rwDivision.Link, "Wrong division.Link");
+            Assert.AreEqual(17, rwDivision.Id, "Wrong division.Id");
+            Assert.AreEqual("Atlantic", rwDivision.Name, "Wrong division.Name");
+            Assert.AreEqual("/api/v1/divisions/17", rwDivision.Link, "Wrong division.Link");
 
             Assert.AreEqual(6, rwConference.Id, "Wrong conference.Id");
             Assert.AreEqual("Eastern", rwConference.Name, "Wrong conference.Name");
@@ -92,9 +92,9 @@ namespace NHLClientTests
             Assert.AreEqual("/api/v1/venues/5081", kVenue.Link, "Wrong Venue.Link");
             Assert.AreEqual("Los Angeles", kVenue.City, "Wrong Venue.City");
 
-            Assert.AreEqual(27, kDivision.Id, "Wrong division.Id");
-            Assert.AreEqual("Honda West", kDivision.Name, "Wrong division.Name");
-            Assert.AreEqual("/api/v1/divisions/27", kDivision.Link, "Wrong division.Link");
+            Assert.AreEqual(15, kDivision.Id, "Wrong division.Id");
+            Assert.AreEqual("Pacific", kDivision.Name, "Wrong division.Name");
+            Assert.AreEqual("/api/v1/divisions/15", kDivision.Link, "Wrong division.Link");
 
             Assert.AreEqual(5, kConference.Id, "Wrong conference.Id");
             Assert.AreEqual("Western", kConference.Name, "Wrong conference.Name");
@@ -113,6 +113,16 @@ namespace NHLClientTests
             var teamContainer = await teamEvent.GetTeams();
 
             Assert.AreEqual(32, teamContainer.Teams.Count, "Wrong number of teams");
+        }
+
+        [TestMethod]
+        public async Task RosterGetTest()
+        {
+            var teamEvent = new NHLClient.Events.APIHandler("https://statsapi.web.nhl.com");
+
+            var teamContainer = await teamEvent.GetRoster(17);
+
+            Assert.AreEqual(21, teamContainer.Roster.Count, "Wrong number of players on the Red Wings roster");
         }
     }
 }
