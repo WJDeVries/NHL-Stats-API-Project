@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Roster";
+}
+
+<div class="row" id="content">
+    <h4>Forwards</h4>
+    <ul class="list-group" data-bind="foreach: forwards">
+        @Html.Partial("Partials/_Player")
+    </ul>
+    <h4>Defensemen</h4>
+    <ul class="list-group" data-bind="foreach: defensemen">
+        @Html.Partial("Partials/_Player")
+    </ul>
+    <h4>Goaltenders</h4>
+    <ul class="list-group" data-bind="foreach: goalies">
+        @Html.Partial("Partials/_Player")
+    </ul>
+</div>
+
+@section scripts {
+    @Scripts.Render("/Scripts/jquery-3.6.0.js")
+    @Scripts.Render("/Scripts/knockout-3.5.1.debug.js")
+    @Scripts.Render("/Scripts/knockout.mapping-latest.js")
+    @Scripts.Render("/Scripts/ko-dirty.js")
+    @Scripts.Render("/Scripts/Team/Roster.js")
+
+    <script type="text/javascript">
+        let ID = @ViewBag.ID;
+    </script>
+}

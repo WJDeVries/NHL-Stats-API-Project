@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Teams";
+}
+
+<div class="row" id="content">
+    <!-- ko foreach: conferences -->
+    <h2><span data-bind="text: name"></span>&nbsp;Conference</h2>
+    <div class="col-sm-12">
+        <!-- ko foreach: divisions -->
+        <h4><span data-bind="text: name"></span>&nbsp;Division</h4>
+        <div class="row">
+            <div class="col-sm-12">
+                <ul data-bind="foreach: teams" class="list-group">
+                    <li class="list-group-item">
+                        <img style="width: 48px; height: 48px;" data-bind="attr: { src: 'https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/' + id + '.svg' }" />
+                        <span data-bind="text: name"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+</div>
+
+@section scripts {
+    @Scripts.Render("/Scripts/jquery-3.6.0.js")
+    @Scripts.Render("/Scripts/knockout-3.5.1.debug.js")
+    @Scripts.Render("/Scripts/knockout.mapping-latest.js")
+    @Scripts.Render("/Scripts/ko-dirty.js")
+    @Scripts.Render("/Scripts/Team/Index.js")
+}
